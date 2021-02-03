@@ -15,12 +15,12 @@ class FestClient:
     @property
     def headers(self):
         return {
-            "User-Agent": "moto-pro/8.2.1 (iPhone; iOS 13.2.3; Scale/3.00)",
+            "User-Agent": "moto-pro/8.2.1",
             "X-Oauth-User": self.fest_player.fest_id,
             "Accept": "application/vnd.topfreegames.com; version=1.6, application/json",
-            "Accept-Language": "en-NL;q=1",
+            # "Accept-Language": "en-NL;q=1",
             "Token": self.fest_player.token,
-            "Accept-Encoding": "gzip, deflate, br",
+            # "Accept-Encoding": "gzip, deflate, br",
         }
 
     # This API call retrieves ALL information about all bikes/parts in Fest.
