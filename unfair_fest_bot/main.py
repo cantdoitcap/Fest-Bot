@@ -19,4 +19,7 @@ if __name__ == "__main__":
 
     # Best way of doing this? No, probably not.
     while True:
-        FestBot(fest_player).play_all_tourneys()
+        try:
+            FestBot(fest_player).play_all_tourneys()
+        except Exception as err:
+            print("Error: %s" % err)
