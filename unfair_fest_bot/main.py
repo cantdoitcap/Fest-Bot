@@ -1,25 +1,33 @@
-"""
-    This is what runs the actual bot
-"""
-
+import time
 from config.config_loader import config
-from fest.fest_player import FestPlayer
-from fest.fest_bot import FestBot
+from src.fest_player import FestPlayer
+from src.fest_bot import FestBot
 
-if __name__ == "__main__":
-    fest_player_id = config.get("player", "fest_id")
-    fest_player_token = config.get("player", "token")
-    fest_player = FestPlayer(fest_player_id, fest_player_token)
+def main():
+    print("=== Fest Bot Started ===")
 
-    print("=" * 20)
-    print("Starting the bot...")
-    print("Fest Player ID: {}".format(fest_player_id))
-    print("Fest Player Token: {}".format(fest_player_token))
-    print("=" * 20)
+    # Load credentials from config.json
+    fest_id = config.get("player", "fest_id")
+    token = config.get("player", "token")
 
-    # Best way of doing this? No, probably not.
+    if not fest_id or not token:
+        print("❌ Missing Fest ID or Token in config.json.")
+        return
+
+    # Create player + bot
+    player = FestPlayer(fest_id, token)
+    bot = FestBot(player)
+
+    # Main bot loop
     while True:
         try:
-            FestBot(fest_player).play_all_tourneys()
-        except Exception as err:
-            print("Error: %s" % err)
+            print("\n🔄 Running bot cycle...")
+            bot.play_all_tourneys()
+            print("✅ Cycle complete. Sleeping for 60 seconds...")
+            time.sleep(60)
+        except Exception as e:
+            print(f"⚠️ Error in bot loop: {e}")
+            time.sleep(30)
+
+if __name__ == "__main__":
+    main()
