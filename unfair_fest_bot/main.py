@@ -1,7 +1,7 @@
 import time
 from config.config_loader import config
-from src.fest_player import FestPlayer
-from src.fest_bot import FestBot
+from fest.fest_player import FestPlayer
+from fest.fest_bot import FestBot
 
 def main():
     print("=== Fest Bot Started ===")
